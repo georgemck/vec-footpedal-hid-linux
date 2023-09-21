@@ -13,7 +13,6 @@ def click():
 	pyautogui.mouseDown()
 	time.sleep(0.1)
 	pyautogui.mouseUp()
-	pyautogui.mouseUp()
 
 ############## Define your actions here ##############
 # Common Options (mouse): pyautogui.mouseDown(), pyautogui.mouseUp(), pyautogui.click() [down and up, has issues though]
@@ -24,10 +23,10 @@ button_actions = {
 	'LEFT_PRESS': (lambda: pyautogui.keyDown('F2')),
 	'LEFT_RELEASE': (lambda: pyautogui.keyUp('F2')),
 
-	'MIDDLE_PRESS': click,
+	'MIDDLE_PRESS': (lambda: pyautogui.click()),
 	'MIDDLE_RELEASE': None,
 
-	'RIGHT_PRESS': click,
+	'RIGHT_PRESS': (lambda: pyautogui.click()),
 	'RIGHT_RELEASE': None,
 }
 #####################################################
