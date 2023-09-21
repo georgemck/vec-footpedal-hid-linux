@@ -2,7 +2,6 @@
 
 
 import evdev
-from evdev import UInput, ecodes as e
 import pyautogui
 
 VENDOR_ID = 0x05f3
@@ -49,7 +48,7 @@ def main():
 	print(f"Using event path: '{event_path}'")
 
 	# Create an InputDevice object for your HID device
-	device = evdev.InputDevice()
+	device = evdev.InputDevice(event_path)
 
 	for event in device.read_loop():
 		if event.type == evdev.ecodes.EV_KEY:
@@ -62,7 +61,6 @@ def main():
 			event_action = f"{event_name}_{event_event}"
 			
 			action_fn = button_actions[event_action]
-
 			action_fn()
 
 			if DEBUG_MODE:
