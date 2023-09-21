@@ -13,6 +13,7 @@ def click():
 	pyautogui.mouseDown()
 	time.sleep(0.1)
 	pyautogui.mouseUp()
+	pyautogui.mouseUp()
 
 ############## Define your actions here ##############
 # Common Options (mouse): pyautogui.mouseDown(), pyautogui.mouseUp(), pyautogui.click() [down and up, has issues though]
