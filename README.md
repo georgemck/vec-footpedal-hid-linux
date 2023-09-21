@@ -5,6 +5,11 @@ A quick and dirty implementation of mapping for a VEC footpedal HID device on Li
 * Allows remapping of a VEC footpedal to any keys.
 * Automatically finds the footpedal.
 
+## Usage
+1. Install Python dependencies: `python3 -m pip install -r ./requirements.txt`
+2. Run `python3 vec-footpedal-hid-linux.py`
+3. Consider modifying the code to change the mappings.
+
 ## Design Technique
 1. Run `sudo evtest` with the device plugged in.
 2. Select the footpedal with the list.
@@ -30,6 +35,10 @@ Event: time 1695265241.808159, type 1 (EV_KEY), code 258 (BTN_2), value 0
 Event: time 1695265241.808159, -------------- SYN_REPORT ------------
 ```
 4. Read and understand the output.
+    * The `code` is the 3 buttons.
+    * 1 is a press, and 0 is a release.
 5. `/dev/input/event*`
 
-## Other Resources
+## Other Resources and Motivation
+The following locations didn't really work, so I created this repo.
+* TODO

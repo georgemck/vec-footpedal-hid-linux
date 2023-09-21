@@ -3,31 +3,70 @@
 
 import evdev
 from evdev import UInput, ecodes as e
+import pyautogui
 
 VENDOR_ID = 0x05f3
 PRODUCT_ID = 0xff
 VERSION_ID = 0x100
 
+DEBUG_MODE = True
+
 def get_event_path_for_correct_device() -> str:
 	""" Select the right /dev/input/eventX device. """
 	return '/dev/input/event9' # FIXME: select the right one automatically
 
-# Define the event code and value to trigger the "enter" key press
-trigger_event_code = 258  # Change this to the correct event code (BTN_2)
-trigger_event_value = 1   # Change this to the correct event value (1 for press, 0 for release)
+# Trigger Event Codes: LEFT=256, MIDDLE=257, RIGHT=258
+# Trigger Event Values: 1=press, 0=release
 
-# Create an InputDevice object for your HID device
-device = evdev.InputDevice('/dev/input/event9')  # Update the path to your device
+trigger_event_codes = { # keys are codes, values are button names
+	256: 'LEFT',
+	257: 'MIDDLE',
+	258: 'RIGHT',
+}
 
-# Create a UInput object to simulate key presses
-ui = UInput()
+trigger_event_values = { # keys are codes, values are actions
+	1: 'PRESS',
+	0: 'RELEASE',
+}
 
-for event in device.read_loop():
-	if event.type == evdev.ecodes.EV_KEY and event.code == trigger_event_code and event.value == trigger_event_value:
-		# Triggered event detected, send an "enter" key press
-		ui.write(e.EV_KEY, e.KEY_ENTER, 1)
-		ui.write(e.EV_KEY, e.KEY_ENTER, 0)
-		ui.syn()
+# Common Options: pyautogui.click(), pyautogui.keyDown(), pyautogui.keyUp(), pyautogui.press() [down and up]
+# For an action, write the line like this -> 'LEFT_PRESS': (lambda: pyautogui.keyDown('F2')),
+# For no action, write the line like this -> 'LEFT_RELEASE': None,
+button_actions = {
+	'LEFT_PRESS': (lambda: pyautogui.keyDown('F2')),
+	'LEFT_RELEASE': (lambda: pyautogui.keyUp('F2')),
 
-		print(f"Triggered event detected: {event.type} {event.code} {event.value}")
+	'MIDDLE_PRESS': (lambda: pyautogui.click()),
+	'MIDDLE_RELEASE': None,
 
+	'RIGHT_PRESS': (lambda: pyautogui.click()),
+	'RIGHT_RELEASE': None,
+}
+
+def main():
+	# Get the path to the device's event thingy
+	event_path = get_event_path_for_correct_device()
+	print(f"Using event path: '{event_path}'")
+
+	# Create an InputDevice object for your HID device
+	device = evdev.InputDevice()
+
+	for event in device.read_loop():
+		if event.type == evdev.ecodes.EV_KEY:
+			trigger_event_code = event.code
+			trigger_event_value = event.value
+
+			event_name = trigger_event_codes[trigger_event_code]
+			event_event = trigger_event_values[trigger_event_value]
+
+			event_action = f"{event_name}_{event_event}"
+			
+			action_fn = button_actions[event_action]
+
+			action_fn()
+
+			if DEBUG_MODE:
+				print(f"Event: event.type={event.type}, event.code={event.code}, event.value={event.value}, event_name={event_name}, event_event={event_event}, event_action={event_action}")
+
+if __name__ == '__main__':
+	main()
