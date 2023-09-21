@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 # TODO: launch automatically
-# TODO: don't require root
 # TODO: argparse option for debug or forcing the device path
 
 from typing import Union
@@ -11,18 +10,19 @@ import argparse
 import time
 
 ############## Define your actions here ##############
-# Common Options: pyautogui.click(), pyautogui.keyDown(), pyautogui.keyUp(), pyautogui.press() [down and up]
+# Common Options (mouse): pyautogui.mouseDown(), pyautogui.mouseUp(), pyautogui.click() [down and up, has issues though]
+# Common Options (keeb):  pyautogui.keyDown(), pyautogui.keyUp(), pyautogui.press() [down and up]
 # For an action, write the line like this>>> 'LEFT_PRESS': (lambda: pyautogui.keyDown('F2')),
 # For no action, write the line like this>>> 'LEFT_RELEASE': None,
 button_actions = {
 	'LEFT_PRESS': (lambda: pyautogui.keyDown('F2')),
 	'LEFT_RELEASE': (lambda: pyautogui.keyUp('F2')),
 
-	'MIDDLE_PRESS': (lambda: pyautogui.click()),
-	'MIDDLE_RELEASE': None,
+	'MIDDLE_PRESS': (lambda: pyautogui.mouseDown()),
+	'MIDDLE_RELEASE': (lambda: pyautogui.mouseUp()),
 
-	'RIGHT_PRESS': (lambda: pyautogui.click()),
-	'RIGHT_RELEASE': None,
+	'RIGHT_PRESS': (lambda: pyautogui.mouseDown()),
+	'RIGHT_RELEASE': (lambda: pyautogui.mouseUp()),
 }
 #####################################################
 
