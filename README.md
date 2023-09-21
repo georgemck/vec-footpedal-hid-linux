@@ -3,13 +3,27 @@ A quick and dirty implementation of mapping for a VEC footpedal HID device on Li
 
 ## Features
 * Allows remapping of a VEC footpedal to any keys.
-* Automatically finds the footpedal.
+* Automatically finds the footpedal. Automatically reconnects on disconnection.
+* Doesn't require sudo, if you follow these instructions.
 
-## Usage
-1. TODO: set perms
-1. Install Python dependencies: `python3 -m pip install -r ./requirements.txt`
-2. Run `python3 vec-footpedal-hid-linux.py`
-3. Consider modifying the code to change the mappings.
+## Contributions
+* Open PRs and GitHub Issues as you wish!
+
+## Setup/Usage
+1. Set permissions so you don't need to run as sudo.
+	1. `sudo nano /etc/udev/rules.d/40-footpedal-hid.rules`
+	2. Paste in the following contents.
+		```
+		SUBSYSTEM=="usb", SYSFS{idVendor}=="05f3", MODE="0666"
+		SUBSYSTEM=="usb", ATTRS{idVendor}=="05f3", MODE="0666"
+		SUBSYSTEM=="input", SYSFS{idVendor}=="05f3", MODE="0666"
+		SUBSYSTEM=="input", ATTRS{idVendor}=="05f3", MODE="0666"
+		```
+	3. Exit `nano` (Ctrl+X, Y, Enter).
+	4. `sudo udevadm control --reload` (or reboot)
+2. Install Python dependencies: `python3 -m pip install -r ./requirements.txt`
+3. Run `python3 vec-footpedal-hid-linux.py`
+4. Consider modifying the code to change the mappings.
 
 ## Design Technique
 1. Run `sudo evtest` with the device plugged in.
@@ -36,10 +50,13 @@ Event: time 1695265241.808159, type 1 (EV_KEY), code 258 (BTN_2), value 0
 Event: time 1695265241.808159, -------------- SYN_REPORT ------------
 ```
 4. Read and understand the output.
-    * The `code` is the 3 buttons.
-    * 1 is a press, and 0 is a release.
+	* The `code` is the 3 buttons.
+	* 1 is a press, and 0 is a release.
 5. `/dev/input/event*`
 
 ## Other Resources and Motivation
 The following locations didn't really work, so I created this repo.
-* TODO
+
+* https://saulalbert.net/blog/transcription-with-a-foot-pedal-under-linux/
+* https://github.com/kostmo/footpedal
+	* Formerly: https://code.google.com/archive/p/footpedal/issues/4#c5
