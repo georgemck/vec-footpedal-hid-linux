@@ -9,6 +9,11 @@ import pyautogui
 import argparse
 import time
 
+def click():
+	pyautogui.mouseDown()
+	time.sleep(0.1)
+	pyautogui.mouseUp()
+
 ############## Define your actions here ##############
 # Common Options (mouse): pyautogui.mouseDown(), pyautogui.mouseUp(), pyautogui.click() [down and up, has issues though]
 # Common Options (keeb):  pyautogui.keyDown(), pyautogui.keyUp(), pyautogui.press() [down and up]
@@ -18,11 +23,11 @@ button_actions = {
 	'LEFT_PRESS': (lambda: pyautogui.keyDown('F2')),
 	'LEFT_RELEASE': (lambda: pyautogui.keyUp('F2')),
 
-	'MIDDLE_PRESS': (lambda: pyautogui.mouseDown()),
-	'MIDDLE_RELEASE': (lambda: pyautogui.mouseUp()),
+	'MIDDLE_PRESS': click,
+	'MIDDLE_RELEASE': None,
 
-	'RIGHT_PRESS': (lambda: pyautogui.mouseDown()),
-	'RIGHT_RELEASE': (lambda: pyautogui.mouseUp()),
+	'RIGHT_PRESS': click,
+	'RIGHT_RELEASE': None,
 }
 #####################################################
 
@@ -30,7 +35,7 @@ VENDOR_ID = 0x05f3
 PRODUCT_ID = 0xff
 VERSION_ID = 0x100
 
-DEBUG_MODE = True
+DEBUG_MODE = False
 RETRY_DELAY_SECONDS = 5
 
 def find_device_path(vendor_id: int, product_id: int, version_id: int) -> Union[str, None]:
