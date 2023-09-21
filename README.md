@@ -2,7 +2,7 @@
 A quick and dirty implementation of mapping for a VEC footpedal HID device on Linux
 
 ## Features
-* Allows remapping of a VEC footpedal to any keys.
+* Allows remapping of a VEC footpedal to any keys/mouse events.
 * Automatically finds the footpedal. Automatically reconnects on disconnection.
 * Doesn't require sudo, if you follow these instructions.
 
@@ -52,7 +52,8 @@ Event: time 1695265241.808159, -------------- SYN_REPORT ------------
 4. Read and understand the output.
 	* The `code` is the 3 buttons.
 	* 1 is a press, and 0 is a release.
-5. `/dev/input/event*`
+5. Find a way to automatically figure out the correct device event path: `/dev/input/event*`
+6. Write code using ChatGPT to read the inputs and call a function for the outputs.
 
 ## Other Resources and Motivation
 The following locations didn't really work, so I created this repo.
