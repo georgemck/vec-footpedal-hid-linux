@@ -51,20 +51,26 @@ def main():
 	device = evdev.InputDevice(event_path)
 
 	for event in device.read_loop():
-		if event.type == evdev.ecodes.EV_KEY:
-			trigger_event_code = event.code
-			trigger_event_value = event.value
+		try:
+			if event.type == evdev.ecodes.EV_KEY:
+				trigger_event_code = event.code
+				trigger_event_value = event.value
 
-			event_name = trigger_event_codes[trigger_event_code]
-			event_event = trigger_event_values[trigger_event_value]
+				event_name = trigger_event_codes[trigger_event_code]
+				event_event = trigger_event_values[trigger_event_value]
 
-			event_action = f"{event_name}_{event_event}"
-			
-			action_fn = button_actions[event_action]
-			action_fn()
+				event_action = f"{event_name}_{event_event}"
+				
+				action_fn = button_actions[event_action]
 
-			if DEBUG_MODE:
-				print(f"Event: event.type={event.type}, event.code={event.code}, event.value={event.value}, event_name={event_name}, event_event={event_event}, event_action={event_action}")
+				if action_fn is not None:
+					action_fn()
+
+				if DEBUG_MODE:
+					print(f"Event: event.type={event.type}, event.code={event.code}, event.value={event.value}, event_name={event_name}, event_event={event_event}, event_action={event_action}")
+		
+		except Exception as e:
+			print(f"Error: {e}")
 
 if __name__ == '__main__':
 	main()

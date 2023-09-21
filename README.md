@@ -6,6 +6,7 @@ A quick and dirty implementation of mapping for a VEC footpedal HID device on Li
 * Automatically finds the footpedal.
 
 ## Usage
+1. TODO: set perms
 1. Install Python dependencies: `python3 -m pip install -r ./requirements.txt`
 2. Run `python3 vec-footpedal-hid-linux.py`
 3. Consider modifying the code to change the mappings.
