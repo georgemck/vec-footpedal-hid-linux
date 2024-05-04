@@ -22,14 +22,7 @@ def hotkeyFunction(txt=None):
 
 	def for_canonical(f):
 		print("hot key")
-		print(f)
 		return lambda k: f(l.canonical(k))
-
-		# hotkey = keyboard.HotKey(keyboard.HotKey.parse('<ctrl>+<alt>+h'),on_activate)
-		# with keyboard.Listener(
-		# 		on_press=for_canonical(hotkey.press), on_release=for_canonical(hotkey.release)) as l:
-		# 	l.join()
-
 
 	def on_press(key):
 		print('> {} ({})'.format(str(key), listener.canonical(key)))
@@ -43,20 +36,6 @@ def hotkeyFunction(txt=None):
 		on_press=on_press,
 		on_release=on_release) as listener:
 			listener.join()
-
-# def on_press(key):
-#     print('> {} ({})'.format(str(key), listener.canonical(key)))
-
-# def on_release(key):
-#     print('< {} ({})'.format(str(key), listener.canonical(key)))
-#     if key == Key.esc:
-#         return False
-
-
-# with Listener(
-#         on_press=on_press,
-#         on_release=on_release) as listener:
-#     listener.join()
 
 def write(txt=None):
     if isinstance(txt, str):
