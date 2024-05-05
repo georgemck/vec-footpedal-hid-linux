@@ -91,10 +91,15 @@ PRODUCT_ID = 0x00ff
 VERSION_ID = 0x000A
 
 # Xbox 360 Wireless Receiver (XBOX)
-# VENDOR_ID = 0x45e
-# PRODUCT_ID = 0x2a1
-# VERSION_ID = 0x114
+VENDOR_ID = 0x45e
+PRODUCT_ID = 0x2a1
+VERSION_ID = 0x114
 
+# Logi USB Headset Logi USB Headset
+# getting error -> No device found or permission denied. Trying again in 5 seconds...
+# VENDOR_ID = 0x46d
+# PRODUCT_ID = 0xa8f 
+# VERSION_ID = 0x111
 
 
 DEBUG_MODE = False

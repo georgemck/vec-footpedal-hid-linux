@@ -1,0 +1,14 @@
+# Logi USB Headset Logi USB Headset
+# ubuntu@Smart-Laptop:~$ sudo evtest
+Input driver version is 1.0.1
+Input device ID: bus 0x3 vendor 0x46d product 0xa8f version 0x111
+Input device name: "Logi USB Headset Logi USB Headset"
+Supported events:
+  Event type 0 (EV_SYN)
+  Event type 1 (EV_KEY)
+    Event code 114 (KEY_VOLUMEDOWN)
+    Event code 115 (KEY_VOLUMEUP)
+    Event code 164 (KEY_PLAYPAUSE)
+    Event code 582 (KEY_VOICECOMMAND)
+  Event type 4 (EV_MSC)
+    Event code 4 (MSC_SCAN)
