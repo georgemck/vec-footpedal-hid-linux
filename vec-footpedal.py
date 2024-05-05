@@ -47,6 +47,7 @@ def write(txt=None):
             sleep(0.05)
 
 def click():
+	print('click')
 	pyautogui.mouseDown()
 	time.sleep(0.1)
 	pyautogui.mouseUp()
