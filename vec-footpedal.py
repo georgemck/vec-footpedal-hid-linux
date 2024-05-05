@@ -89,11 +89,33 @@ button_actions = {
 VENDOR_ID = 0x05f3
 PRODUCT_ID = 0x00ff
 VERSION_ID = 0x000A
+# dmesg
+# [   33.956769] usb 1-5.1: new full-speed USB device number 9 using xhci_hcd
+# [   34.062991] usb 1-5.1: New USB device found, idVendor=045e, idProduct=0291, bcdDevice= 1.14
+# [   34.063005] usb 1-5.1: New USB device strings: Mfr=0, Product=0, SerialNumber=0
+# [   34.348732] usb 1-5.2: new full-speed USB device number 10 using xhci_hcd
+# [   34.457090] usb 1-5.2: New USB device found, idVendor=05f3, idProduct=00ff, bcdDevice= 1.20
+# [   34.457105] usb 1-5.2: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+# [   34.457111] usb 1-5.2: Product: VEC USB Footpedal
+# [   34.457116] usb 1-5.2: Manufacturer: VEC 
+# [   34.468624] input: VEC  VEC USB Footpedal as /devices/pci0000:00/0000:00:14.0/usb1/1-5/1-5.2/1-5.2:1.0/0003:05F3:00FF.0006/input/input25
+# [   34.476387] usb 1-5.2: input irq status -75 received
+# [   34.529327] hid-generic 0003:05F3:00FF.0006: input,hiddev2,hidraw5: USB HID v1.11 Device [VEC  VEC USB Footpedal] on usb-0000:00:14.0-5.2/input0
+
+
+
+
+
 
 # Xbox 360 Wireless Receiver (XBOX)
 VENDOR_ID = 0x45e
 PRODUCT_ID = 0x2a1
 VERSION_ID = 0x114
+
+
+
+
+
 
 # Logi USB Headset Logi USB Headset
 # getting error -> No device found or permission denied. Trying again in 5 seconds...
