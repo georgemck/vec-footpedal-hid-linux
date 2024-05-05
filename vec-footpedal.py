@@ -85,9 +85,17 @@ button_actions = {
 }
 #####################################################
 
+# VEC INFINITY-3
 VENDOR_ID = 0x05f3
 PRODUCT_ID = 0x00ff
 VERSION_ID = 0x000A
+
+# Xbox 360 Wireless Receiver (XBOX)
+# VENDOR_ID = 0x45e
+# PRODUCT_ID = 0x2a1
+# VERSION_ID = 0x114
+
+
 
 DEBUG_MODE = False
 RETRY_DELAY_SECONDS = 5
@@ -144,11 +152,12 @@ def main():
 	device = evdev.InputDevice(event_path)
 	for event in device.read_loop():
 		try:
+			print(event)
 			if event.type == evdev.ecodes.EV_KEY:
 				trigger_event_code = event.code
 				trigger_event_value = event.value
 				trigger_event_type = event.type
-				# print("pedal event","code:"+str(trigger_event_code),"type:"+str(trigger_event_type),"value:"+str(trigger_event_value))
+				# print("event","code:"+str(trigger_event_code),"type:"+str(trigger_event_type),"value:"+str(trigger_event_value))
 
 				event_name = trigger_event_codes[trigger_event_value]
 				# print(event_name)
@@ -163,7 +172,7 @@ def main():
 
 				if action_fn is not None:
 					action_fn()
-					# print(action_fn())
+					print(action_fn())
 
 				if DEBUG_MODE:
 					print(f"Event: event.type={event.type}, event.code={event.code}, event.value={event.value}, event_name={event_name}, event_event={event_event}, event_action={event_action}")
