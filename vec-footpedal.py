@@ -106,6 +106,12 @@ VERSION_ID = 0x000A
 
 
 
+# Nintendo Wii Remote & Nintendo Wii Remote IR & Nintendo Wii Remote Accelerometer
+VENDOR_ID = 0x57e
+PRODUCT_ID = 0x306
+VERSION_ID = 0x3a1c
+
+
 
 # Xbox 360 Wireless Receiver (XBOX)
 VENDOR_ID = 0x45e
